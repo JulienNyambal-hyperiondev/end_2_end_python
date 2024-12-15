@@ -1,6 +1,6 @@
 # HyperionDev Chatbot: Flask Random Response App
 
-This is a beginner-friendly Flask web application that acts as a simple chatbot. Users can type a message, and the app responds with a random sentence from a predefined list or generates a new one dynamically using the **Wonderwords** library.
+This is a beginner-friendly Flask web application that acts as a simple chatbot. Users can type a message, and the app responds with a random sentence from a predefined list or dynamically generated sentences using the **Wonderwords** library.
 
 ---
 
@@ -8,9 +8,9 @@ This is a beginner-friendly Flask web application that acts as a simple chatbot.
 
 The project demonstrates how to:
 1. Build a **Flask-based backend** for handling user input.
-2. Use the **Wonderwords library** to dynamically generate random sentences.
-3. Create a responsive and clean web interface using **Bootstrap**.
-4. Combine HTML, CSS, and Python to build a simple end-to-end application.
+2. Use a modular approach to manage random sentence generation in `sentence_selector.py`.
+3. Use the **Wonderwords library** to dynamically generate sentences.
+4. Create a responsive and clean web interface using **Bootstrap**.
 
 ---
 
@@ -75,29 +75,50 @@ Make sure you have the following installed:
 ```
 flask_chatbot_app/
 │
-├── app.py                # Main backend file
+├── static/
+│   └── styles.css         # Custom CSS styles
 │
 ├── templates/
-│   └── index.html        # Frontend HTML file with Bootstrap
+│   └── index.html         # Frontend HTML file with Bootstrap
 │
-└── static/
-    └── styles.css        # Optional custom CSS file
+├── __init__.py            # Flask app initialization (optional for modularization)
+├── app.py                 # Main backend Flask app
+└── sentence_selector.py   # Logic for random sentence generation
 ```
 
 ---
 
-## 🎨 **Screenshots**
+## 🎨 **Screenshot**
 
-### **User Interface**
-![Chatbot Screenshot](https://via.placeholder.com/800x400.png?text=HyperionDev+Chatbot+UI)
+![Chatbot Screenshot](hyperiondev_chatbot_screenshot.png)
 
 ---
 
 ## 📦 **Dependencies**
 
-- Flask: Web framework for Python.
-- Wonderwords: Library for generating random sentences.
-- Bootstrap: Frontend library for responsive UI.
+- **Flask**: Web framework for Python.
+- **Wonderwords**: Library for generating random sentences.
+- **Bootstrap**: Frontend library for responsive UI.
+
+---
+
+## 🧩 **About `sentence_selector.py`**
+
+The file `sentence_selector.py` is responsible for handling the logic of random sentence generation. It makes the project more modular by separating core logic from the Flask app.
+
+**Example content of `sentence_selector.py`:**
+```python
+import random
+from wonderwords import RandomSentence
+
+random_sentence_generator = RandomSentence()
+
+def get_random_sentence():
+    predefined_sentences = ["Hello", "How are you?", "I am HD"]
+    generated_sentence = random_sentence_generator.sentence()
+    all_sentences = predefined_sentences + [generated_sentence]
+    return random.choice(all_sentences)
+```
 
 ---
 
