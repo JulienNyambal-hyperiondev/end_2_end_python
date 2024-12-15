@@ -31,7 +31,7 @@ Make sure you have the following installed:
 
 1. **Clone this repository**:
    ```bash
-   git clone https://github.com/yourusername/hyperiondev-chatbot.git
+   git clone https://github.com/JulienNyambal-hyperiondev/end_2_end_python.git
    cd hyperiondev-chatbot
    ```
 
