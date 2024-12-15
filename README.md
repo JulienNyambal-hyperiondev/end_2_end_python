@@ -9,19 +9,13 @@ This is a beginner-friendly Flask web application that acts as a simple chatbot.
 The project demonstrates how to:
 1. Build a **Flask-based backend** for handling user input.
 2. Use a modular approach to manage random sentence generation in `sentence_selector.py`.
-3. Use the **Wonderwords library** to dynamically generate sentences.
-4. Create a responsive and clean web interface using **Bootstrap**.
+3. Deploy a Flask app as a web service on **Render.com**.
+4. Use the **Wonderwords library** to dynamically generate sentences.
+5. Create a responsive and clean web interface using **Bootstrap**.
 
 ---
 
-## 💻 **Technologies Used**
-- **Python (Flask)** – For backend logic and routing.
-- **Wonderwords** – For generating random sentences dynamically.
-- **HTML/CSS/Bootstrap** – For the frontend user interface.
-
----
-
-## 🚀 **Getting Started**
+## 🚀 **Getting Started Locally**
 
 Follow the steps below to set up and run the project on your local machine.
 
@@ -49,24 +43,76 @@ Make sure you have the following installed:
 
 3. **Install dependencies**:
    ```bash
-   pip install flask wonderwords
+   pip install -r requirements.txt
    ```
 
 ---
 
-### 3️⃣ **Running the Application**
+### 3️⃣ **Running the Application Locally**
 
-1. Run the Flask app:
+1. Run the Flask app with Gunicorn:
    ```bash
-   python app.py
+   gunicorn app:app
    ```
 
 2. Open your browser and go to:
    ```
-   http://127.0.0.1:5000
+   http://127.0.0.1:8000
    ```
 
 3. Type a message in the **"Say something"** input field and click **Submit**. The app will respond with a random sentence.
+
+---
+
+## 🌐 **Deployment Guide on Render.com**
+
+### Step 1: Prerequisites
+1. Sign up for a free account on [Render.com](https://render.com).
+2. Ensure your code is pushed to a GitHub repository.
+
+---
+
+### Step 2: Prepare Your Code for Deployment
+1. Ensure the `requirements.txt` file is in the root directory of your project. Include **gunicorn** for deployment:
+   ```bash
+   Flask==3.0.0
+   wonderwords==2.2.0
+   gunicorn==21.2.0
+   ```
+
+2. Your app should expose the **Flask app** as `app` in `app.py`. Example:
+   ```python
+   from flask import Flask
+   app = Flask(__name__)
+
+   @app.route("/")
+   def home():
+       return "Hello from HyperionDev Chatbot!"
+
+   if __name__ == "__main__":
+       app.run()
+   ```
+
+---
+
+### Step 3: Deploy on Render.com
+1. Log in to Render and click **"New" > "Web Service"**.
+2. Connect your GitHub repository containing the project.
+3. In the Render setup:
+   - **Build Command**:  
+     ```bash
+     pip install -r requirements.txt
+     ```
+   - **Start Command**:  
+     ```bash
+     gunicorn app:app
+     ```
+4. Choose a free plan and deploy the service.
+
+---
+
+### Step 4: Access Your App
+Once deployed, Render will provide a live URL to access your chatbot. Visit the link to see your app in action!
 
 ---
 
@@ -96,29 +142,10 @@ flask_chatbot_app/
 
 ## 📦 **Dependencies**
 
-- **Flask**: Web framework for Python.
-- **Wonderwords**: Library for generating random sentences.
-- **Bootstrap**: Frontend library for responsive UI.
-
----
-
-## 🧩 **About `sentence_selector.py`**
-
-The file `sentence_selector.py` is responsible for handling the logic of random sentence generation. It makes the project more modular by separating core logic from the Flask app.
-
-**Example content of `sentence_selector.py`:**
-```python
-import random
-from wonderwords import RandomSentence
-
-random_sentence_generator = RandomSentence()
-
-def get_random_sentence():
-    predefined_sentences = ["Hello", "How are you?", "I am HD"]
-    generated_sentence = random_sentence_generator.sentence()
-    all_sentences = predefined_sentences + [generated_sentence]
-    return random.choice(all_sentences)
-```
+- Flask: Web framework for Python.
+- Wonderwords: Library for generating random sentences.
+- Gunicorn: WSGI server for deployment.
+- Bootstrap: Frontend library for responsive UI.
 
 ---
 
