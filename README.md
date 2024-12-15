@@ -90,7 +90,7 @@ flask_chatbot_app/
 
 ## 🎨 **Screenshot**
 
-![Chatbot Screenshot](hyperiondev_chatbot_screenshot.png)
+![Chatbot Screenshot](screenshot.png)
 
 ---
 
